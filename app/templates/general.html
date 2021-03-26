@@ -1,0 +1,140 @@
+
+<style>
+    body {
+        /* background-image: url('../static/images/c-d-x-PDX_a_82obo-unsplash.jpg'); */
+        background: url('../static/images/c-d-x-PDX_a_82obo-unsplash.jpg') no-repeat center center fixed;
+
+
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: cover;
+        
+        -webkit-background-size: cover;
+        -moz-background-size: cover; 
+        -o-background-size: cover;
+    
+
+        /* -moz-transform: scaleY(-1);
+        -o-transform: scaleY(-1);
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        filter: FlipV;
+        -ms-filter: "FlipV"; */
+
+        /* -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH"; */
+
+    }
+
+    /* body {
+        transform:scaleX(-1);
+    } */
+
+    /* body:before { 
+    }
+    
+    body:after {
+        transform:scaleX(-1);
+    }  */
+
+    </style>
+
+    
+<div>
+    {% extends 'layout.html' %}
+
+
+    <div class="container centered-content-box">
+        {% block content %}
+            <h3>
+                General Page
+                {% if current_user.is_authenticated %}
+                    <!-- <span class='float-right' style="color: white; font-style:italic; text-decoration: underline;">Hello, {{ user.first_name }}!</span> -->
+                    <a class='float-right' style="color: white; font-style:italic; text-decoration: underline;" href="{{ url_for('main.profile') }}">Hello, {{ user.first_name }}!</a>
+                {% else %}
+                    <!-- <span class='float-right' style="color: white; font-style:italic; text-decoration: underline;">Gooday, Music Lover!</span> -->
+                    <a class='float-right' style="color: white; font-style:italic; text-decoration: underline;" href="{{ url_for('main.profile') }}">Gooday, Music Lover!</a>
+                {% endif %}
+
+            </h3>
+            <hr>
+            
+            {% if current_user.is_authenticated %}
+
+                <form action="{{ url_for('blog.create_post') }}" method='POST'>
+                    <div class="form-group">
+                        <div class='row'>
+                            <div class='col-md-11'>
+                                <div class='input-group'>
+                                    <input type="text" name="status_update" class="form-control" placeholder="What's on your mind?"/>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='input-group'>
+                                    <input type="submit" class="btn btn-dark" value="Post"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            {% else %}
+                <ul class="list-group" style="opacity: 0.7;">
+                    <li class="list-group-item">
+                        <h6>
+                            Please log in to view posts.
+                        </h6>                    
+                    </li>
+                </ul>
+            {% endif %}
+
+
+            {% if posts %}
+                <ul class="list-group" style="opacity: 0.7;">
+                    {% for p in posts %}
+                    <li class="list-group-item">
+                        <h4>
+                            <img class="card-img-top float-left" src="{{ user.avatar(p.user.email, 400) }}" alt="Profile Picture" style="height: 60px; width: 60px; border-radius: 50%; margin: 6px;">
+                            <span style="font-size: 15px; color: gray;" class='float-right'>{{ moment(p.date_created).fromNow() }}</span>
+                        </h4>
+                        <p>{{ p['body'] }}</p>
+                        <cite>&mdash; {{ p.user.email }}
+                    
+                            <span class='float-right'>
+                                <div class="row">
+                                        {% if current_user.email == p.user.email %}
+                                                <div class="float-right">
+                                                    <a href="{{ url_for('blog.post_edit', post_id=p.id) }}" class='btn btn-info' style="font-size: 12px;">Edit <span><i class="fa fa-edit"></i></span></a>
+                                                    <!-- <a href="{{ url_for('blog.post_edit_test', post_id=p.id) }}" class='btn btn-info' style="font-size: 12px;">Edit <span><i class="fa fa-edit"></i></span></a> -->
+                                                </div>
+                                        {% endif %} 
+
+                                    <div class=""></div> 
+
+                                    <div class="float-right">
+                                        {% for u in users %}
+                                            {% if p.user.email == u.email %}
+                                                {% if not current_user.is_following(u) %}
+                                                    <a style="font-size: 12px;" href="{{ url_for('auth.following', user_id=u.id) }}" class='btn btn-success'>Follow <span><i class="fa fa-plus"></i></span></a>
+                                                {% else %}
+                                                    <a style="font-size: 12px;" href="{{ url_for('auth.unfollowing', email=u.email )}}" class='btn btn-warning'>Unfollow <span><i class="fa fa-minus"></i></span></a>
+                                                {% endif %} 
+                                            {% endif %} 
+                                        {% endfor %}
+                                    </div>  
+                                      
+                                </div>
+
+                            </span>
+                        </cite>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+        {% endblock %}
+    </div>
+</div>

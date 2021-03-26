@@ -1,0 +1,80 @@
+
+<style>
+    body {
+        /* background: url('./frank-septillion-Qrspubmx6kE-unsplash.jpg') no-repeat center center fixed; */
+
+        /* background: url('../static/images/frank-septillion-Qrspubmx6kE-unsplash.jpg') no-repeat center center fixed; */
+        /* background-image: url('../static/images/frank-septillion-Qrspubmx6kE-unsplash.jpg') no-repeat center center fixed; */
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover; 
+        -o-background-size: cover;
+    }
+</style>
+
+    
+
+<div>
+    {% extends 'layout.html' %}
+
+    <div class="container centered-content-box">
+        {% block content %}
+            <h3>
+                Post Edit Page
+            </h3>
+            <hr>
+
+            <!-- <img class="card-img-top" src="url_for('images', filename='adrian-korte-5gn2soeAc40-unsplash.jpg')" alt="Profile Picture" style="min-height: 140px; min-width: 140px; max-height: 140px; max-width: 140px; border-radius: 50%;" /> -->
+            <!-- <img class="card-img-top" src="{{url_for('static', filename='images/adrian-korte-5gn2soeAc40-unsplash.jpg')}}" alt="Profile Picture" style="min-height: 140px; min-width: 140px; max-height: 140px; max-width: 140px; border-radius: 50%;" /> -->
+            <!-- <img class="card-img-top" src="../static/images/adrian-korte-5gn2soeAc40-unsplash.jpg" alt="Profile Picture" style="min-height: 140px; min-width: 140px; max-height: 140px; max-width: 140px; border-radius: 50%;" /> -->
+            <!-- <img class="card-img-top" src="../../app/static/images/austin-prock-Hz3Kjzgyv_Q-unsplash.jpg" alt="Profile Picture" style="min-height: 140px; min-width: 140px; max-height: 140px; max-width: 140px; border-radius: 50%;" /> -->
+            <!-- <img class="card-img-top" src="/Users/enavs/Desktop/coding_temple/class/capstone_project/billboard_flask_version_V4/app/static/images/brian-kostiuk-WZ43jnCeWOs-unsplash.jpg" alt="Profile Picture" style="min-height: 140px; min-width: 140px; max-height: 140px; max-width: 140px; border-radius: 50%;" /> -->
+
+            <p>Original Post: </p>
+                <ul class="list-group" style="opacity: 0.7;">
+                    <li class="list-group-item">
+                        <h4>
+                            <span style="font-size: 15px; color: gray;" class='float-right'>{{ moment(post.date_created).fromNow() }}</span>
+                        </h4>
+                        <p>{{ post.body }}</p>
+                            <span class='float-right'>
+                                <div class="row">
+                                    <div class="float-right">
+                                        <a href="{{ url_for('blog.post_delete', post_id=post.id) }}" method='GET' class='btn btn-danger' style="font-size: 12px;">Delete <span><i class="fa fa-trash"></i></span></a>
+                                    </div>
+                                </div>
+                            </span>
+                        </cite>
+                    </li>
+                </ul>
+
+                <div class="row"></div>
+
+                
+                <br>
+                <br>
+
+                <p>What do you want your updated post say? </p>
+                <form action="{{ url_for('blog.post_update', post_id=post.id) }}" method='POST'>
+                    <div class="form-group">
+                        <div class='row'>
+                            <div class='col-md-11'>
+                                <div class='input-group'>
+                                    <input type="text" name="status_change_post" class="form-control" placeholder="What's on your mind?"/>
+                                </div>
+                            </div>
+                            <div class='col-md-1'>
+                                <div class='input-group'>
+                                    <button style="font-size: 9px;" class="btn btn-block btn-dark">Update<span><i class="fa fa-paper-plane"></i></span></button>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+ 
+
+        {% endblock %}
+    </div>
+</div>

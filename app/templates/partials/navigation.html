@@ -1,0 +1,139 @@
+
+<style>
+
+    .nav-full-bar-output {
+        opacity: 0.3;
+        position: relative;
+        z-index: 1000; 
+    }
+
+    .nav-full-bar-output:hover {
+        opacity: 0.8;
+        position: relative;
+        z-index: 1000;
+    }
+
+    .nav-item {
+        color: white;
+    }
+
+    .nav-link {
+        color: white;
+    }
+
+    .dropdown-menu {
+        background-color: black;
+    }
+    
+    .dropdown-item {
+        color: white;
+    }
+    .dropdown-item:hover {
+        color: black;
+    }
+
+    /* A link that has not been visited */
+    a:link {
+        color: white;
+        text-decoration: none;
+    }
+    /* A link that has been visited */
+    a:visited {
+        color: white;
+        text-decoration: none;
+    }
+    /* A link that is hovered on */
+    a:hover {
+        color: white;
+        text-decoration: none;
+    }
+    /* A link that is selected */
+    a:active {
+        color: white;
+        text-decoration: none;
+    }
+
+</style>
+
+
+<div class="nav-full-bar-output">
+    <!-- <nav class="navbar navbar-expand-sm navbar-dark bg-primary"> -->
+    <nav class="navbar-expand-sm" style="background-color: black; color: white; font-size: 20px;">
+        <div class="navbar-collapse nav-bar-box">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.home_testing') }}">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.general') }}">General</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.profile') }}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.your_library') }}">Your Library</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.data_creation') }}">Data</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.analysis') }}">Analysis</a>
+                </li>
+
+                <!-- <li class="nav-item">
+                    <a class="nav-link" style="color: white;" href="{{ url_for('main.analysis_results') }}">Analysis Results</a>
+                </li> -->
+
+
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.explore') }}">Explore</a>
+                    </li>
+
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" style="color: white;" href="{{ url_for('main.explore_results') }}">Explore Results</a>
+                    </li> -->
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <a class="dropdown-item" href="{{ url_for('shop.home') }}">Products</a>
+                            <a class="dropdown-item" href="{{ url_for('shop.cart') }}">
+                                Cart
+                                <span class="float-right">
+                                    <span class="badge badge-secondary bg-lg">{{ cart['items']|length }}</span>
+                                </span>
+                            </a>
+                            <a class="dropdown-item" href="#">Checkout</a>
+                        </div>
+                    </li>
+                {% endif %}
+
+            </ul>
+
+            <ul class='navbar-nav m1-auto'>
+                {% if not current_user.is_authenticated %}
+                <li class='nav-item'>
+                    <a href="{{ url_for('auth.login') }}" class='nav-link'>Login</a>
+                </li>
+                <li class='nav-item'>
+                    <a href="{{ url_for('auth.register') }}" class='nav-link'>Register</a>
+                </li>
+                {% else %}
+                <li class='nav-item'>
+                    <a href="{{ url_for('auth.logout') }}" class='nav-link'>Logout</a>
+                </li>
+                {% endif %}
+
+            </ul>
+            
+        </div>
+    </nav>
+
+</div>

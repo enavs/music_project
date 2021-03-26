@@ -1,0 +1,81 @@
+
+<style>
+    body {
+        /* background-image: url('../static/images/c-d-x-PDX_a_82obo-unsplash.jpg'); */
+        background: url('../static/images/emily-morter-8xAA0f9yQnE-unsplash.jpg') no-repeat center center fixed;
+
+
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: cover;
+        
+        -webkit-background-size: cover;
+        -moz-background-size: cover; 
+        -o-background-size: cover;
+    
+
+        /* -moz-transform: scaleY(-1);
+        -o-transform: scaleY(-1);
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        filter: FlipV;
+        -ms-filter: "FlipV"; */
+
+        /* -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH"; */
+
+    }
+
+    /* body {
+        transform:scaleX(-1);
+    } */
+
+    /* body:before {
+        
+    }
+    
+    body:after {
+        transform:scaleX(-1);
+    } */
+
+    </style>
+
+    
+<div>
+    {% extends 'layout.html' %}
+
+
+
+{% block content %}
+<h3 style="color: white;">
+    Decade Analysis
+</h3>
+<hr style=" height: 1px; background-color: white; border: none;">
+
+    <!-- <form action="{{ url_for('main.analysis', song_name=song_name) }}" method='POST'> -->
+    <form action="{{ url_for('main.analysis', song_name=song_name) }}" method='POST'>
+        <div class="form-group">
+            <div class="form-group">
+                <input type="number" class="form-control" name="song_decade_search" min="1958" max="2021" placeholder="Select a year (use YYYY format) to get data on the Billboard Top 100">
+                <!-- <input type="text" name="song_decade_search" class="form-control" placeholder="Type in a song to get its Top 100 Data"> -->
+
+            </div>        
+           
+            <div class="form-group">
+                <button class="btn btn-block btn-info btn-dark">Submit <span><i class="fa fa-paper-plane"></i></span></button>   
+            </div>    
+        </div>
+    </form>
+
+
+ 
+
+{% endblock %}
+
+
+
+

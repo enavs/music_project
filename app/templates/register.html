@@ -1,0 +1,47 @@
+
+<style>
+    body {
+        background: url('../static/images/ricardo-gomez-angel-5YM26lUicfU-unsplash.jpg') no-repeat center center fixed;
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover; 
+        -o-background-size: cover;
+    }
+</style>
+
+
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h3>Register</h3>
+    <hr>
+
+    <div class='col-md-6'>
+        <form action="{{ url_for('auth.register') }}" method='POST'>
+            <div class="form-group">
+                <input type="text" name="first_name" class='form-control' placeholder='First Name'>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="last_name" class='form-control' placeholder='Last Name'>
+            </div>
+
+            <div class="form-group" style="background-color: white; border-radius: 2px;;">
+                <p style="margin: 5px;">Your email address is automatically created by using your first name and the first letter of your last name followed by @codingtemple.com </p>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="password" class='form-control' placeholder='Pasword'>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="confirm_password" class='form-control' placeholder='Confirm Pasword'>
+            </div>
+
+            <input type="submit" value='Submit' class='btn btn-info btn-block'>
+            <!-- <button class='btn btn-info btn-block' type='submit'>Submit</button> -->
+        </form>
+    </div>
+{% endblock %}

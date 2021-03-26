@@ -1,0 +1,57 @@
+
+<style>
+    body {
+        /* background-image: url('../static/images/c-d-x-PDX_a_82obo-unsplash.jpg'); */
+        /* background: url('../static/images/c-d-x-PDX_a_82obo-unsplash.jpg') no-repeat center center fixed; */
+        /* background: url('../static/images/frank-septillion-Qrspubmx6kE-unsplash.jpg') no-repeat center center fixed; */
+
+        
+        background: url_for('static', filename='images/adrian-korte-5gn2soeAc40-unsplash.jpg') no-repeat center center fixed;
+
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: cover;
+        
+        -webkit-background-size: cover;
+        -moz-background-size: cover; 
+        -o-background-size: cover;
+    
+
+        /* -moz-transform: scaleY(-1);
+        -o-transform: scaleY(-1);
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        filter: FlipV;
+        -ms-filter: "FlipV"; */
+
+        /* -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH"; */
+
+    }
+
+    /* body {
+        transform:scaleX(-1);
+    } */
+
+    /* body:before {
+        
+    }
+    
+    body:after {
+        transform:scaleX(-1);
+    } */
+
+</style>
+
+say hi
+
+
+<img class="card-img-top" src="url_for('images', filename='adrian-korte-5gn2soeAc40-unsplash.jpg')" alt="Profile Picture" style="min-height: 140px; min-width: 140px; max-height: 140px; max-width: 140px; border-radius: 50%;" />
+<img class="card-img-top" src="{{url_for('static', filename='images/adrian-korte-5gn2soeAc40-unsplash.jpg')}}" alt="Profile Picture" style="min-height: 140px; min-width: 140px; max-height: 140px; max-width: 140px; border-radius: 50%;" />
+<img class="card-img-top" src="../static/images/adrian-korte-5gn2soeAc40-unsplash.jpg" alt="Profile Picture" style="min-height: 140px; min-width: 140px; max-height: 140px; max-width: 140px; border-radius: 50%;" />
+<img class="card-img-top" src="../../app/static/images/austin-prock-Hz3Kjzgyv_Q-unsplash.jpg" alt="Profile Picture" style="min-height: 140px; min-width: 140px; max-height: 140px; max-width: 140px; border-radius: 50%;" />
+<img class="card-img-top" src="/Users/enavs/Desktop/coding_temple/class/capstone_project/billboard_flask_version_V4/app/static/images/brian-kostiuk-WZ43jnCeWOs-unsplash.jpg" alt="Profile Picture" style="min-height: 140px; min-width: 140px; max-height: 140px; max-width: 140px; border-radius: 50%;" />

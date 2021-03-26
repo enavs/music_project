@@ -1,0 +1,246 @@
+
+<style>
+    body {
+        /* background-image: url('../static/images/marius-masalar-rPOmLGwai2w-unsplash.jpg'); */
+        background-image: url('../static/images/mohammad-metri-1oKxSKSOowE-unsplash.jpg');
+
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: cover;
+    
+        -webkit-background-size: cover;
+        -moz-background-size: cover; 
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+</style>
+
+    
+<div>
+{% extends 'layout.html' %}
+
+
+{% block styles %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+{% endblock %}
+
+{% block content %}
+    <h3 style="color: white;">
+        Profile
+    </h3>
+    <hr style=" height: 1px; background-color: white; border: none;">
+
+
+    <div class="row">
+        <div class="col-sm-4 container" >
+            <img class="card-img-top float-right" src="{{ user.avatar(user.email, 400) }}" alt="Profile Picture" style="min-height: 140px; min-width: 140px; max-height: 140px; max-width: 140px; border-radius: 50%; margin: 6px;">
+            <p style="color: white; font-size: 14px;">
+                {{ user.first_name }} {{ user.last_name }}
+                <br>
+
+                {{ user.email }} 
+                <br>
+
+                <!-- <span><i class="fa fa-users"></i></span>
+                {{ all_users|length }} Followers <cite>&mdash; {{ all_users|length }} Following
+                <br> -->
+
+                <span><i class="fa fa-users"></i></span>
+                {{ total_following_me_user_count }} Followers <cite>&mdash; {{ total_followed_user_count|length }} Following    
+                <br>
+
+                {% if posts %}
+                    You have made {{ posts|length }} posts 
+                {% endif %}
+
+                <br>
+
+                {% if user.last_seen %}
+                    <p style="color: white; font-size: 14px;">Last seen on: {{ moment(user.last_seen).format('LLL') }} local time</p>
+                {% endif %}
+            </p>
+
+            <!-- <div class="library-foto">
+                <img class="libary-image" id="glowing-border" src="../static/images/alfons-morales-YLSwjSy7stw-unsplash.jpg" alt="Profile Picture" style="width: 350px; height: 50px; object-fit: cover; border-radius: 3%; "/>
+                <div class="centered-library-foto"><a style="color: white; font-style:italic; font-size: 20px;" href="{{ url_for('main.your_library') }}">Go to Your Library</a></div>
+                <style>
+                    .library-foto {
+                    opacity: 0.75;
+                    }
+                    .library-foto:hover {
+                    opacity: 1.0;
+                    }
+/*                     
+                    #glowing-border:hover {
+                        border: 2px solid #dadada;
+                        border-radius: 7px;
+                    }
+
+                    #glowing-border:focus { 
+                        outline: none;
+                        border-color: #9ecaed;
+                        box-shadow: 0 0 10px #9ecaed;
+                    } */
+
+                    .library-foto {
+                    margin-top: 5px;
+                    position: relative;
+                    text-align: center;
+                    /* color: white; */
+                    }
+                    .centered-library-foto {
+                    position: absolute;
+                    top: 63%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    }
+                </style>
+            </div> -->
+        </div>
+
+
+
+        <div class="col-sm-4">
+            <form action="{{ url_for('auth.update_user') }}" method='POST'>
+                <div class="row">
+                    <div class="col-sm-6 standardized">
+                        <div class="form-group">
+                            <input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{ current_user.first_name }}">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 standardized">
+                        <div class="form-group">
+                            <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{ current_user.last_name }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 standardized">
+                        <div class="form-group">
+                            <input type="text" name="email" class="form-control" placeholder="Email" value="{{ current_user.email }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 standardized">
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 standardized">
+                        <div class="form-group">
+                            <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 standardized">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-info btn-block btn-dark">Update Information <span><i class="fa fa-paper-plane"></i></span></button>
+                        </div>
+                    </div>
+                </div>      
+            </form>
+        </div>
+
+        <!-- <div class="col-sm-1"></div> -->
+
+
+       
+
+        <div class="col-sm-4">
+            {% if user.about_me %}
+                <form action=" {{ url_for('auth.update_user_about_me_again') }}" method='POST'>
+                    <div class="form-group">
+                        <textarea class="form-control" name="about_me_again" placeholder="{{ user.about_me }}" style="height: 146px;"></textarea>
+                    </div>    
+                    <div class="form-group">
+                        <button class="btn btn-info btn-block btn-dark">Update <span><i class="fa fa-paper-plane"></i></span></button>   
+                    </div>  
+                </form>
+            {% else %}  
+                <form action=" {{ url_for('auth.update_user_about_me') }}" method='POST'>
+                    <div class="form-group">
+                        <textarea class="form-control" name="about_me" placeholder="Write a brief summary about yourself..." style="height: 146px;"></textarea>
+                    </div>    
+                    <div class="form-group">
+                        <button class="btn btn-info btn-block btn-dark">Submit <span><i class="fa fa-paper-plane"></i></span></button>   
+                    </div>  
+                </form>
+            {% endif %}  
+        </div>   
+
+
+        
+
+
+
+    
+    </div>
+    <hr>
+
+    <form action="{{ url_for('blog.create_post') }}" method='POST'>
+        <div class="form-group">
+            <div class='row'>
+                <div class='col-sm-11'>
+                    <div class='input-group'>
+                        <input type="text" name="status_update" class="form-control" placeholder="What's on your mind?"/>
+                    </div>
+                </div>
+                <div class='col-sm-1'>
+                    <div class='input-group'>
+                        <input type="submit" class="btn btn-dark" value="Post"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    {% if posts %}
+        <ul class="list-group" style="opacity: 0.7;">
+            {% for p in posts %}
+            <li class="list-group-item">
+                <h4>
+                    <img class="card-img-top float-left" src="{{ user.avatar(user.email, 400) }}" alt="Profile Picture" style="height: 55px; width: 55px; border-radius: 50%; margin: 6px;">
+                    {{ p['title'] }}
+                    <span style="font-size: 15px; color: gray;" class='float-right'>{{ moment(p.date_created).fromNow() }}</span>
+                </h4>
+                <h6>{{ p['body'] }}
+                    <br>
+                    <br>
+                    <cite>&mdash; {{ p.user.email }}
+
+
+
+
+                        <span class='float-right'>
+                            <div class="row">
+                                <div class="float-right">
+                                    <a href="{{ url_for('blog.post_edit', post_id=p.id) }}" class='btn btn-info' style="font-size: 12px;">Edit <span><i class="fa fa-edit"></i></span></a>
+                                </div>
+                            </div>
+
+                        </span>
+
+
+
+                        
+
+                    </cite>
+                </h6>
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+
+    
+
+{% endblock %}
+</div>

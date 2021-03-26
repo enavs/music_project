@@ -1,0 +1,50 @@
+
+<style>
+    body {
+        background-image: url('../static/images/markus-spiske-hU9gx8YfVK4-unsplash.jpg');
+        /* background-image: url('../static/images/brian-kostiuk-WZ43jnCeWOs-unsplash.jpg'); */
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover; 
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+</style>
+
+<div>
+
+{% extends 'layout.html' %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('shop.static', filename='css/shop.css') }}">
+{% endblock %}
+
+
+{% block content %}
+    <h3>Your Library</h3>
+    <hr>
+
+    <div class="card-deck">
+        {% for p in products %}
+            <div class="col-md-3 product">
+                <div class="card">
+                    <div class="card-header">
+                        <a href="#" class="btn btn-info btn-block" style="font-size: 12px;">Listen to this Song <span><i class="fa fa-music"></i></span></a>
+                    </div>
+                    <div class="card-body" style="height: 160px;">
+                        <img class="card-img-top" src="{{ p.song_picture }}" align="right" alt="{{ p.song_name.title() }}" style="height: 90px; width: 90px;">
+                        <p style="font-size: 12px;"><strong>Song:</strong> {{p.song_name.title() }}</p>
+                        <p style="font-size: 12px;"><strong>Artist:</strong> {{ p.song_artist.title() }}</p>
+                    </div>
+                    
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+</div>

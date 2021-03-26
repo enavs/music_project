@@ -1,0 +1,38 @@
+I’m thinking for my project, to look at the top 100 songs on the billboard and see why they were so popular.  
+Going to look at demographics (age, race, etc.), new york times news of the time, and some other data.
+
+Steps. 
+1. Would need to go to the billboard website and scrap the data: https://www.billboard.com/charts/hot-100. 
+2. Would need to go to the New York Times website and scrap the data: https://www.nytimes.com. 
+3. Look into demographic data here:  https://data.census.gov/cedsci/table?q=United%20States&tid=DECENNIALPLNAT2010.P1&hidePreview=false.
+4. Complete data analytics 
+
+
+Website.
+1. Build out with a background image that changes every 5 to 10 seconds
+2. Have a border on the top that says welcome.  Here it will also have the login button and a register button
+3. Once user has registered and loggedin, they can type in their favorite song and it will return back a picture 
+    of their song and a small audio sample and show it's billboard stats
+4. I will also show the current week's top 25 songs
+5. I will have another site where it will show my data analysis of the decades, that show how current 
+    events and demographic data are influencing music top billboard stats
+6. 
+
+
+billboard API's:
+1. https://rapidapi.com/LDVIN/api/billboard-api?utm_source=google&utm_medium=cpc&utm_c[…]teqH8_C9SOeOkaQWoakSBJOLQc0Wn-P3VGjmHZST7BnPD0HZwaAufAEALw_wcB
+2. https://www.npmjs.com/package/billboard-top-100
+3. https://www.function1.com/2017/09/splunking-the-billboard-hot-100-with-help-from-the-spotify-api
+4. https://www.function1.com/sites/default/files/field/image/Screen%20Shot%202017-06-26%20at%202.05.24%20PM.png
+
+
+
+
+
+
+
+
+
+
+
+

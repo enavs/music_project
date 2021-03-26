@@ -1,0 +1,77 @@
+
+<style>
+    body {
+        /* background-image: url('../static/images/c-d-x-PDX_a_82obo-unsplash.jpg'); */
+        background: url('../static/images/emily-morter-8xAA0f9yQnE-unsplash.jpg') no-repeat center center fixed;
+
+
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: cover;
+        
+        -webkit-background-size: cover;
+        -moz-background-size: cover; 
+        -o-background-size: cover;
+    
+
+        /* -moz-transform: scaleY(-1);
+        -o-transform: scaleY(-1);
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        filter: FlipV;
+        -ms-filter: "FlipV"; */
+
+        /* -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH"; */
+
+    }
+
+    /* body {
+        transform:scaleX(-1);
+    } */
+
+    /* body:before {
+        
+    }
+    
+    body:after {
+        transform:scaleX(-1);
+    } */
+
+    </style>
+
+    
+<div>
+    {% extends 'layout.html' %}
+
+
+
+{% block content %}
+<h3 style="color: white;">
+    Decade Analysis
+    <!-- <span class="float-right"><img class="card-img-top" src="../static/images/billboard_top_100_logo.png"  alt="Top 100 Logo" style="height: 40px; width: 600px;" /></span> -->
+</h3>
+<hr style=" height: 1px; background-color: white; border: none;">
+    
+    <div class="row">
+        <div class="col-md-4">
+            <form action="{{ url_for('billboard.billboard_pull_redirect_analysis') }}" method='POST'>
+                <div class="form-group">
+                    <button type="submit" class = "btn btn-info btn-block btn-dark">Search Another Decade <span><i class="fa fa-undo"></i></span></button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-1"></div>
+    </div>
+
+    <div class="row">
+        <p style="color: white;">Here are the results of your query!</p>
+    </div>
+
+    {% endblock %}
+</div>

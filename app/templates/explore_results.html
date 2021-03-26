@@ -1,0 +1,188 @@
+
+<style>
+    /* img {
+    filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg) brightness(95%) contrast(80%);
+    opacity: 0.7;
+
+    } */
+
+    body {
+        background-image: url('../static/images/matt-botsford-OKLqGsCT8qs-unsplash_flipped.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover; 
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+
+</style>
+
+
+<div>
+{% extends 'layout.html' %}
+
+{% block content %}
+<h3 style="color: white;">
+    Explore
+    <!-- <span class="float-right"><img class="card-img-top" src="../static/images/billboard_top_100_logo.png"  alt="Top 100 Logo" style="height: 40px; width: 600px;" /></span> -->
+</h3>
+<hr style=" height: 1px; background-color: white; border: none;">
+    
+    <div class="row">
+        <div class="col-md-5">
+            <form action="{{ url_for('billboard.billboard_pull_redirect') }}" method='POST'>
+                <div class="form-group">
+                    <button type="submit" class = "btn btn-info btn-block btn-dark">Search Another Song <span><i class="fa fa-undo"></i></span></button>
+                </div>
+            </form>
+
+
+            {% if songs_latest_date %}
+                <div class="container" style="opacity: 0.8; background-color: white; bakcound; border-radius: 10px;">
+                        <img class="card-img-top" src="{{ songs_latest_date.song_picture }}" align="right" alt="{{ songs_latest_date.song_name.title() }} photo" style="height: 100px; width: 100px; margin: 5px" />
+                        <p>You selected this song: <strong>{{ songs_latest_date.song_name.title() }}</strong> by <strong>{{ songs_latest_date.song_artist.title() }}</strong>. </p>
+                        <p>Its current ranking is number {{ songs_latest_date.song_rank }} - as of the week of {{ songs_latest_date.start_of_week_date.strftime("%b") }} {{ songs_latest_date.start_of_week_date.day }}, {{ songs_latest_date.start_of_week_date.year }} </p>
+                        <p>It has been in the top ten a total of <strong>{{ songs|length }}</strong> time(s)</p>
+                </div>
+            {% endif %}
+
+            <!-- {% if songs %}
+            <div class="container" style="opacity: 0.8; background-color: white; border-radius: 6px; font-size: 14px;">
+                <p style="text-decoration: underline;"><strong>This will list every instance of the song on the Top 100 Billboards:</strong></p>
+
+                {% if songs_latest_date %}
+                    <p>You selected this song: <strong>{{ songs_latest_date.song_name.title() }}</strong> by <strong>{{ songs_latest_date.song_artist.title() }}</strong>. </p>
+                {% endif %}
+
+                {% for song in songs %}
+                    <ul>
+                        <li>As of the week of {{ song.start_of_week_date.strftime("%b") }} {{ song.start_of_week_date.day }}, {{ song.start_of_week_date.year }} - Its current ranking is number {{ song.song_rank }}</li>
+                    </ul>
+                {% endfor %}
+            </div>
+        {% endif %} -->
+
+
+        </div>
+
+
+        <div class="col-md-7">
+            <div class="row">
+                <div class="container" style="background-color: white; border-radius: 6px;">
+                    <center><p>{{ title_line }}</p></center>
+                    <canvas id="line" width="600" height="400"></canvas>
+                    <script>
+                        // line chart data
+                        var lineData = {
+    
+                        labels : [
+                            {% for item in labels_line %}
+                                "{{ item }}",
+                            {% endfor %}
+                            ],
+                            
+                        datasets : [{
+                            fillColor: "rgba(151,187,205,0.2)",
+                            strokeColor: "rgba(151,187,205,1)",
+                            pointColor: "rgba(151,187,205,1)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(151,187,205,1)",
+                            bezierCurve : false,
+                            data : [
+                                {% for item in values_line %}
+                                    {{ item }},
+                                {% endfor %}]
+                                }
+                            ]
+                        }
+                        
+                        Chart.defaults.global.animationSteps = 50;
+                        Chart.defaults.global.tooltipYPadding = 16;
+                        Chart.defaults.global.tooltipCornerRadius = 0;
+                        Chart.defaults.global.tooltipTitleFontStyle = "normal";
+                        Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+                        Chart.defaults.global.animationEasing = "easeOutBounce";
+                        Chart.defaults.global.responsive = false;
+                        Chart.defaults.global.scaleLineColor = "black";
+                        Chart.defaults.global.scaleFontSize = 16;
+                        
+                        // get line chart canvas
+                        var mychart_line = document.getElementById("line").getContext("2d");
+    
+                        steps = 10
+                        max = {{max_line}}
+    
+                        // draw line chart
+                        var LineChartDemo_line = new Chart(mychart_line).Line(lineData, {
+                        scaleOverride: true,
+                        scaleSteps: steps,
+                        scaleStepWidth: Math.ceil(max / steps),
+                        scaleStartValue: 0,
+                        scaleShowVerticalLines: true,
+                        scaleShowGridLines : true,
+                        barShowStroke : true,
+                        scaleShowLabels: true,
+                        bezierCurve: false,
+                        });
+                    </script>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="container" style="background-color: white; border-radius: 6px;">
+                    <center><p>{{ title }}</p></center>
+                    <canvas id="chart" width="600" height="400"></canvas>
+                    <script>
+                        // bar chart data
+                        var barData = {
+                        labels : [
+                        {% for item in labels %}
+                        "{{ item }}",
+                        {% endfor %}
+                        ],
+                        datasets : [{
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        data : [
+                        {% for item in values %}
+                        "{{ item }}",
+                        {% endfor %}
+                        ]
+                        }
+                        ]
+                        }
+                        // get bar chart canvas
+                        var mychart = document.getElementById("chart").getContext("2d");
+                        steps = 1
+                        max = {{max}}
+                        // draw bar chart
+                        new Chart(mychart).Bar(barData, {
+                        scaleOverride: true,
+                        scaleSteps: steps,
+                        scaleStepWidth: Math.ceil(max / steps),
+                        scaleStartValue: 0,
+                        scaleShowVerticalLines: true,
+                        scaleShowGridLines : true,
+                        barShowStroke : true,
+                        scaleShowLabels: true
+                        }
+                        );
+                    </script>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+
+
+    {% endblock %}
+</div>

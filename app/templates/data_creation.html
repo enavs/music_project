@@ -1,0 +1,96 @@
+
+<style>
+    body {
+        background: url('../static/images/johannes-groll-mrIaqKh9050-unsplash.jpg') no-repeat center center fixed;
+
+
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+        background-size: cover;
+        
+        -webkit-background-size: cover;
+        -moz-background-size: cover; 
+        -o-background-size: cover;
+    }
+
+    .font-awesomey {
+        color: white;
+    }
+
+    .text-background {
+        background-color: white; 
+        opacity: 0.7; 
+        margin: 3px; 
+        height: 55px;
+
+    .text-text {
+        margin: 3px;
+    }
+
+    }
+
+    </style>
+    
+<div>
+    {% extends 'layout.html' %}
+
+
+
+{% block content %}
+<h3 style="color: white;">
+    Data Pulls
+</h3>
+<hr style=" height: 1px; background-color: white; border: none;">
+
+    <form action="{{ url_for('billboard.billboard_pull') }}" method='POST'>
+        <div class='row'>
+            <div class='col-md-4'>
+                <div class="form-group">
+                    <div class='input-group'>
+                        <input type="submit" class="btn btn-success" value="Create List of Top 100 Songs"/>
+                        <!-- <a href="{{ url_for('billboard.billboard_pull') }}" class="btn btn-success">Create List of Top 100 Songs <span><i class="fa fa-database"></i></span></a> -->
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-8'>
+                <div class="container text-background">
+                    <p class="text-text">There are currently {{ '{:,.0f}'.format(songs_in_song_database) }} song(s) in the Song database.  Min date of {{ min_song_date.strftime("%B %d, %Y") }} and Max date of {{ max_song_date.strftime("%B %d, %Y") }}.</p>
+                </div> 
+            </div>
+        </div>
+    </form>
+
+    <form action="{{ url_for('shop.product_creation') }}" method='POST'>
+        <div class='row'>
+            <div class='col-md-4'>
+                <div class="form-group">
+                    <div class='input-group'>
+                        <input type="submit" class="btn btn-warning" value="Create Post Data"/>
+                        <!-- <a href="{{ url_for('shop.product_creation') }}" class="btn btn-warning">Create Post Data <span><i class="fa fa-database"></i></span></a> -->
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-8'>
+                <div class="container text-background">
+                    <p class="text-text">There are currently {{ '{:,.0f}'.format(products_in_product_database) }} product(s) in the Product database.</p>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <!-- <br>
+    <br>
+    <div class="container font-awesomey">
+        <span>one<i class="fas fas-database"></i></span><br>
+        <span>two<i class="fas fa-database"></i></span><br>
+        <span>three<i class="fa fas-database"></i></span><br>
+        <span>four<i class="fa fa-database"></i></span><br>
+    </div>
+    <br>
+    <br> -->
+
+{% endblock %}
+
+
+
+
